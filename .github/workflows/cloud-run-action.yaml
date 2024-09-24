@@ -37,6 +37,7 @@ jobs:
           --region us-east1 \
           --image us-east1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/docker-images-samples/consumer-messaging \
           --platform managed \
-          --allow-unauthenticated \
+          --no-allow-unauthenticated \
           --max-instances=1 \
+          --min-instances=1 \
           --project ${{ secrets.GCP_PROJECT_ID }}
