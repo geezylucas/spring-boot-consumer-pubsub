@@ -6,7 +6,6 @@ import com.geezylucas.springbootconsumerpubsub.model.Body;
 import com.geezylucas.springbootconsumerpubsub.model.UserMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +37,7 @@ public class PubSubController {
             userMessage = objectMapper.readValue(new String(Base64.getDecoder().decode(data)), UserMessage.class);
         } catch (JsonProcessingException e) {
             log.error(e.getMessage());
-            return Mono.just(new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST));
+            return Mono.just(new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
         }
 
         log.info("UserMessage info: {}", userMessage);
