@@ -25,8 +25,6 @@ public class PubSubController {
     @PostMapping("/")
     public Mono<ResponseEntity<String>> receiveMessage(@RequestBody Body body) {
         // Get PubSub message from request body.
-        log.info("Message received: {}", body);
-
         Body.Message message = body.getMessage();
         if (message == null) {
             String msg = "Bad Request: invalid Pub/Sub message format";
