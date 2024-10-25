@@ -40,7 +40,7 @@ public class PubSubController {
             return Mono.just(new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
         }
 
-        log.info("UserMessage info: {}", userMessage);
+        log.info("UserMessage info codigofacilito: {}", userMessage);
         return Mono.just(new ResponseEntity<>(userMessage.getBody(), HttpStatus.OK));
     }
 }
