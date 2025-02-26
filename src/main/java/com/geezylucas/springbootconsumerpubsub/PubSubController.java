@@ -42,7 +42,7 @@ public class PubSubController {
         }
 
         SecureRandom rand = new SecureRandom();
-        if (rand.nextInt(1, 3) == userMessage.getRandom()) {
+        if (rand.nextInt(3) == userMessage.getRandom()) {
             log.info("Random number is {}, retry", userMessage.getRandom());
             return Mono.just(new ResponseEntity<>("User invalid", HttpStatus.INTERNAL_SERVER_ERROR));
         }
