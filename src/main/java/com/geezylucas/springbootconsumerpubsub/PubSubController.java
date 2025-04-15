@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.security.SecureRandom;
 import java.util.Base64;
 
 // PubsubController consumes a Pub/Sub message.
@@ -40,7 +41,13 @@ public class PubSubController {
             return Mono.just(new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR));
         }
 
-        log.info("UserMessage info codigofacilito: {}", userMessage);
+        SecureRandom rand = new SecureRandom();
+        if (rand.nextInt(3) == userMessage.getRandom()) {
+            log.info("Random number is {}, retry", userMessage.getRandom());
+            return Mono.just(new ResponseEntity<>("User invalid", HttpStatus.INTERNAL_SERVER_ERROR));
+        }
+
+        log.info("UserMessage info: {}", userMessage);
         return Mono.just(new ResponseEntity<>(userMessage.getBody(), HttpStatus.OK));
     }
 }
